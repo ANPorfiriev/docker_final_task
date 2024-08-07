@@ -12,15 +12,16 @@ RUN apk --no-cache --update add \
     ln -sf /usr/bin/php83 /usr/bin/php
 
 ADD docker/ /    
-
-USER nginx
-
 ADD https://github.com/kanboard/kanboard/archive/refs/tags/v1.2.38.tar.gz /var/www/app
 RUN cd /var/www/app && tar xzvf v1.2.38.tar.gz && rm -f v1.2.38.tar.gz
+
+USER nginx
 
 WORKDIR /usr/local/bin/
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD []
+
+
 
 
