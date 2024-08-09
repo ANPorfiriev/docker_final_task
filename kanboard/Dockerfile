@@ -1,4 +1,5 @@
 ARG ALPINE_VERSION=3.20.2
+ARG KANBOARD_VERSION=1.2.38
 
 FROM alpine:${ALPINE_VERSION}
 
@@ -12,15 +13,17 @@ RUN apk --no-cache --update add \
     ln -sf /usr/bin/php83 /usr/bin/php
 
 ADD docker/ /    
-ADD https://github.com/kanboard/kanboard/archive/refs/tags/v1.2.38.tar.gz /var/www/app
-RUN cd /var/www/app && tar xzvf v1.2.38.tar.gz --strip-components 1 && rm -f v1.2.38.tar.gz
+ADD https://github.com/kanboard/kanboard/archive/refs/tags/v${KANBOARD_VERSION}.tar.gz /var/www/app
+RUN cd /var/www/app && \
+    tar x -z -f v${KANBOARD_VERSION}.tar.gz -C /var/www/app --strip-components 1 && \
+    rm -f v${KANBOARD_VERSION}.gz \
+    echo ${KANBOARD_VERSION} > /var/www/app/app/version.txt
 
 #USER nginx
 
-VOLUME /var/www/app/data
-VOLUME /var/www/app/plugins
-VOLUME /etc/nginx/ssl
-
+#VOLUME /var/www/app/data
+#VOLUME /var/www/app/plugins
+#VOLUME /etc/nginx/ssl
 
 EXPOSE 80 443
 

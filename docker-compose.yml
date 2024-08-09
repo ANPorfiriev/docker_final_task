@@ -1,0 +1,77 @@
+services:
+  # front-nginx:
+  #   image: 
+  #   ports:
+  #    - "8086:80"
+  #    - "8446:443"
+  #   networks:
+  #     - front
+    
+  app-kanboard:
+    image: kanboard:alpine-1.2.38
+    build: ./kanboard
+    restart: always
+    depends_on:
+      - db-postgres
+    healthcheck:
+      test: "curl -f http://localhost:80 || exit 1"
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s  
+    ports:
+      - 8087:80
+    volumes:
+      - kanboard_plugins:/var/www/app/plugins
+      - kanboard_ssl:/etc/nginx/ssl
+    networks:
+      front:
+        ipv4_address: 10.100.11.22
+      back:
+        ipv4_address: 10.100.12.22
+
+  db-postgres:
+    image: postgres:16.4-alpine3.20
+    restart: always
+    # healthcheck:
+    #   test: ["executable", "arg"]
+    #   interval: 1m30s
+    #   timeout: 30s
+    #   retries: 5
+    #   start_period: 30s
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - env/postgres.env
+    networks:
+      back:
+        ipv4_address: 10.100.12.33
+  
+  adminer:
+    image: adminer:4.8.1
+    restart: unless-stopped
+    ports:
+      - 8090:8080
+    networks:
+      back:
+        ipv4_address: 10.100.12.34      
+
+networks:
+  front:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.100.11.0/24
+  back:
+    driver: bridge
+    ipam:
+      config:
+        - subnet:  10.100.12.0/24    
+
+volumes:
+  postgres-data:
+    driver: local    
+  kanboard_plugins:
+    driver: local    
+  kanboard_ssl:
+    driver: local
