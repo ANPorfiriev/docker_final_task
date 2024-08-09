@@ -2,27 +2,27 @@
 Интенсив Docker 2024 ИТ-академия Росатом
 
 # Описание задания
-- [ Итоговое задание] (README-job.md)
+- [Итоговое задание](README-job.md)
 
 ## Выбор решения
 
-**kanboard**
+**kanboard** \
 Цель прикрутить postgres
 
-- [ ] (https://github.com/kanboard/kanboard)
-- [ ] ()
-- [ ] (https://github.com/kanboard/kanboard/releases)
-- [ ] (https://docs.kanboard.org/v1/admin/postgresql/)
-- [ ] (https://docs.kanboard.org/v1/admin/docker/)
+- https://github.com/kanboard/kanboard
+- https://github.com/kanboard/kanboard/releases
+- https://docs.kanboard.org/v1/admin/postgresql/
+- https://docs.kanboard.org/v1/admin/docker/
 
-
-**структура**
-|front
-  |caddy (network: front)
-|app
-  |kanboard (network: front, back)
-|db
-  |postgres (network: back)
+**структура**\
+```
+front
+ |--caddy (network: front)
+app
+ |--kanboard (network: front, back)
+db
+ |--postgres (network: back)
+```
 
 ## Запуск приложения
 
