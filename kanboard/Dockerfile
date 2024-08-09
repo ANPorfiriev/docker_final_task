@@ -13,9 +13,16 @@ RUN apk --no-cache --update add \
 
 ADD docker/ /    
 ADD https://github.com/kanboard/kanboard/archive/refs/tags/v1.2.38.tar.gz /var/www/app
-RUN cd /var/www/app && tar xzvf v1.2.38.tar.gz && rm -f v1.2.38.tar.gz
+RUN cd /var/www/app && tar xzvf v1.2.38.tar.gz --strip-components 1 && rm -f v1.2.38.tar.gz
 
-USER nginx
+#USER nginx
+
+VOLUME /var/www/app/data
+VOLUME /var/www/app/plugins
+VOLUME /etc/nginx/ssl
+
+
+EXPOSE 80 443
 
 WORKDIR /usr/local/bin/
 
