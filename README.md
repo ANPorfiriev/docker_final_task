@@ -7,7 +7,7 @@
 ## Выбор решения
 
 **kanboard** \
-Цель прикрутить postgres
+Цель прикрутить postgres в качестве базы, caddy в качестве фронта
 
 - https://github.com/kanboard/kanboard
 - https://github.com/kanboard/kanboard/releases
@@ -27,6 +27,12 @@ db
 ## Запуск приложения
 
 sudo docker-compose -d up
+
+## Вход/использование
+
+Front: http://localhost:8087  ->admin/admin
+Adminer: http://localhost:8090
+
 
 ## kanboard build debug
 
