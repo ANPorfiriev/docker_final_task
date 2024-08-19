@@ -31,7 +31,7 @@ docker-compose -d up
 ## Вход/использование
 
 Front: http://localhost:8087  ->admin/admin \
-Adminer: http://localhost:8090 \
+Adminer: http://localhost:8088 \
 
 
 ## kanboard build debug

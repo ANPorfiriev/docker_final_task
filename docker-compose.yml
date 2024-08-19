@@ -3,9 +3,7 @@ services:
     image: caddy:2.8.4-alpine
     ports:
       - "8087:80"
-#      - "8447:443"
       - "8088:8080"
-#      - "8447:443"
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
     networks:
@@ -23,8 +21,6 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s  
-#    ports:
-#      - 8087:80
     volumes:
       - kanboard_plugins:/var/www/app/plugins
       - kanboard_ssl:/etc/nginx/ssl

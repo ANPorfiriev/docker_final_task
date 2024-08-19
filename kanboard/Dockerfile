@@ -1,7 +1,9 @@
 ARG ALPINE_VERSION=3.20.2
-ARG KANBOARD_VERSION=1.2.38
 
 FROM alpine:${ALPINE_VERSION}
+
+ARG KANBOARD_VERSION=1.2.38
+
 
 RUN apk --no-cache --update add \
     tzdata openssl unzip nginx bash ca-certificates s6 curl ssmtp mailx php83 php83-phar php83-curl \
